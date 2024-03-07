@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2BB0A6DC-89D3-4FE3-B0D3-CF94FA4C5853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOI.Id.Validation.Api.Client", "src\MOI.Id.Validation.Api.Client\MOI.Id.Validation.Api.Client.csproj", "{ED38126D-6907-4A15-94A4-5C51422A8E76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED38126D-6907-4A15-94A4-5C51422A8E76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED38126D-6907-4A15-94A4-5C51422A8E76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED38126D-6907-4A15-94A4-5C51422A8E76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED38126D-6907-4A15-94A4-5C51422A8E76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED38126D-6907-4A15-94A4-5C51422A8E76} = {2BB0A6DC-89D3-4FE3-B0D3-CF94FA4C5853}
+	EndGlobalSection
+EndGlobal
