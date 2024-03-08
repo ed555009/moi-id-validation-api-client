@@ -1,0 +1,62 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text.Json;
+using Microsoft.IdentityModel.Tokens;
+using MOI.Id.Validation.Api.Client.Configs;
+using MOI.Id.Validation.Api.Client.Interfaces;
+using MOI.Id.Validation.Api.Client.Models.Requests;
+
+namespace MOI.Id.Validation.Api.Client.Services;
+
+public class JwtService : IJwtService
+{
+	private readonly JwtConfig _jwtConfig;
+	private readonly MOIIdValidationApiConfig _mOIIdVerificationApiConfig;
+
+	public JwtService(JwtConfig jwtConfig, MOIIdValidationApiConfig mOIIdValidationApiConfig)
+	{
+		_jwtConfig = jwtConfig;
+		_mOIIdVerificationApiConfig = mOIIdValidationApiConfig;
+	}
+
+	public async Task<string> BuildAsync(ConditionMapModel conditionMapModel)
+	{
+		using RSA rsa = RSA.Create();
+		rsa.ImportRSAPrivateKey(GetRSAPrivateKey(), out _);
+
+		JwtSecurityToken jwtSecurityToken = new(
+			claims: await BuildClaims(conditionMapModel),
+			signingCredentials: new SigningCredentials(new RsaSecurityKey(rsa), SecurityAlgorithms.RsaSha256)
+			{
+				CryptoProviderFactory = new CryptoProviderFactory { CacheSignatureProviders = false }
+			}
+		);
+
+		return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+	}
+
+	byte[] GetRSAPrivateKey() =>
+		Convert.FromBase64String(_mOIIdVerificationApiConfig.RSAPrivateKey
+			.Replace("-----BEGIN RSA PRIVATE KEY-----", string.Empty)
+			.Replace("-----END RSA PRIVATE KEY-----", string.Empty)
+			.Replace("\n", string.Empty)
+			.Replace("\r", string.Empty));
+
+	async Task<IEnumerable<Claim>> BuildClaims(ConditionMapModel conditionMapModel) =>
+		new List<Claim>
+		{
+			new("orgId", _jwtConfig.OrganizationId),
+			new("apId", _jwtConfig.ApplicationId),
+			new("userId", JwtConfig.UserId),
+			new("jobId", JwtConfig.JobId),
+			new("opType", JwtConfig.OpType),
+			new("conditionMap", JsonSerializer.Serialize(conditionMapModel)),
+			new(JwtRegisteredClaimNames.Iss, _jwtConfig.Issuer),
+			new(JwtRegisteredClaimNames.Aud, _jwtConfig.Audience),
+			new(JwtRegisteredClaimNames.Iat, _jwtConfig.IssuedAt.ToString(), ClaimValueTypes.Integer64),
+			new(JwtRegisteredClaimNames.Exp, _jwtConfig.ExpiredAt.ToString(), ClaimValueTypes.Integer64),
+			new(JwtRegisteredClaimNames.Sub, JwtConfig.Subject),
+			new(JwtRegisteredClaimNames.Jti, await JwtConfig.JtiGenerator())
+		};
+}
