@@ -1,5 +1,15 @@
 # MOI.Id.Validation.Api.Client
 
+[![GitHub](https://img.shields.io/github/license/ed555009/moi-id-validation-api-client)](LICENSE)
+![Build Status](https://dev.azure.com/edwang/github/_apis/build/status/moi-id-validation-api-client?branchName=main)
+[![Nuget](https://img.shields.io/nuget/v/MOI.Id.Validation.Api.Client)](https://www.nuget.org/packages/MOI.Id.Validation.Api.Client)
+
+![Coverage](https://sonarcloud.io/api/project_badges/measure?project=moi-id-validation-api-client&metric=coverage)
+![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=moi-id-validation-api-client&metric=alert_status)
+![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=moi-id-validation-api-client&metric=reliability_rating)
+![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=moi-id-validation-api-client&metric=security_rating)
+![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=moi-id-validation-api-client&metric=vulnerabilities)
+
 
 ## Installation
 
