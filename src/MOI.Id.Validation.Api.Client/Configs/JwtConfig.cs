@@ -25,7 +25,7 @@ public class JwtConfig : IAppConfig
 	/// <summary>
 	/// 能識別公司（企業）內部使用者之帳號，供日誌記錄用，最長12碼（英數）
 	/// </summary>
-	public static string UserId => UnifiedId.NewId();
+	public static string UserId => new UnifiedId(DateTime.UtcNow.Ticks).ToString()[..12];
 
 	/// <summary>
 	/// 內政部配賦之作業代號，固定值

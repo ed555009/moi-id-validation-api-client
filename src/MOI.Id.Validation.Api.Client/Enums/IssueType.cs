@@ -6,7 +6,7 @@ namespace MOI.Id.Validation.Api.Client.Enums;
 /// <summary>
 /// 領補換類別
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverter))]
 public enum IssueType
 {
 	/// <summary>

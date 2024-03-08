@@ -6,7 +6,7 @@ namespace MOI.Id.Validation.Api.Client.Enums;
 /// <summary>
 /// 行政區域代碼
 /// </summary>
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumMemberConverter))]
 public enum IssueSiteType
 {/// <summary>
  /// 連江
