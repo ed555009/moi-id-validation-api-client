@@ -3,7 +3,9 @@ namespace MOI.Id.Validation.Api.Client.Models.Responses;
 public abstract class CheckIdCardApplyModel
 {
 	/// <summary>
-	/// 查驗總結果<br />
+	/// 查驗總結果
+	/// </summary>
+	/// <remarks>
 	/// 1=國民身分證資料與檔存資料相符<br />
 	/// 2=身分證字號目前驗證資料錯誤次數已達1次，今日錯誤累積達3次後，此身分證字號將無法查詢<br />
 	/// 3=身分證字號目前驗證資料錯誤次數已達2次，今日錯誤累積達3次後，此身分證字號將無法查詢<br />
@@ -14,6 +16,6 @@ public abstract class CheckIdCardApplyModel
 	/// 8=單一使用者出現異常使用情形，暫停使用者權限<br />
 	/// 9=國民身分證資料與檔存資料相符，且無統號變更紀錄<br />
 	/// A=國民身分證資料與檔存資料相符，且有統號變更紀錄<br />
-	/// </summary>
+	/// </remarks>
 	public string? CheckIdCardApply { get; set; }
 }
