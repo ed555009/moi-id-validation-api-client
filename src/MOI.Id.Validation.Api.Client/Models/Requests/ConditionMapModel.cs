@@ -24,7 +24,7 @@ public class ConditionMapModel : IBaseRequestModel
 	/// <summary>
 	/// 發證日期，民國格式7碼
 	/// </summary>
-	[Required, RegularExpression(@"^[0|1]\d{6}$")]
+	[Required, RegularExpression(@"^[0-1]\d{2}(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])$")]
 	[JsonPropertyName("applyYyymmdd")]
 	public string? IssuedDate { get; set; }
 
