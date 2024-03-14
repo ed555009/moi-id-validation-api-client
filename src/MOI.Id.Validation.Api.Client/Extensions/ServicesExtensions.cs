@@ -21,7 +21,7 @@ public static class ServicesExtensions
 		var refitSettings = GetRefitSettings();
 
 		_ = services
-			.AddTransient<IJwtConfig>(_ => jwtConfig)
+			.AddSingleton(jwtConfig)
 			.AddSingleton(moiIdValidationApiConfig)
 			.AddRefitClient<IMOIIdValidationApi>(refitSettings)
 			.ConfigureHttpClient(c => c.BaseAddress = new Uri($"{moiIdValidationApiConfig.BaseUrl}/integration/rwv2c2"));
