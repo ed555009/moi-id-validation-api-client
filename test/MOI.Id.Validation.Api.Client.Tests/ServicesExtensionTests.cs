@@ -62,7 +62,7 @@ public class ServicesExtensionTests : BaseServiceTests
 
 		// Then
 		Assert.Contains(services, x => x.ServiceType == typeof(MOIIdValidationApiConfig));
-		Assert.Contains(services, x => x.ServiceType == typeof(JwtConfig));
+		Assert.Contains(services, x => x.ServiceType == typeof(IJwtConfig));
 
 		Assert.Contains(services, x => x.ServiceType == typeof(IMOIIdValidationApi));
 
