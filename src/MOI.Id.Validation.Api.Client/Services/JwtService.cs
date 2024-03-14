@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MOI.Id.Validation.Api.Client.Configs;
 using MOI.Id.Validation.Api.Client.Interfaces;
@@ -11,11 +12,13 @@ namespace MOI.Id.Validation.Api.Client.Services;
 
 public class JwtService : IJwtService
 {
+	private readonly ILogger<JwtService> _logger;
 	private readonly JwtConfig _jwtConfig;
 	private readonly MOIIdValidationApiConfig _mOIIdVerificationApiConfig;
 
-	public JwtService(JwtConfig jwtConfig, MOIIdValidationApiConfig mOIIdValidationApiConfig)
+	public JwtService(ILogger<JwtService> logger, JwtConfig jwtConfig, MOIIdValidationApiConfig mOIIdValidationApiConfig)
 	{
+		_logger = logger;
 		_jwtConfig = jwtConfig;
 		_mOIIdVerificationApiConfig = mOIIdValidationApiConfig;
 	}
@@ -33,7 +36,11 @@ public class JwtService : IJwtService
 			}
 		);
 
-		return new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+		var token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
+
+		_logger.LogDebug("JWT Token: {Token}", token);
+
+		return token;
 	}
 
 	byte[] GetRSAPrivateKey() =>

@@ -1,5 +1,7 @@
+using Microsoft.Extensions.Logging;
 using MOI.Id.Validation.Api.Client.Interfaces;
 using MOI.Id.Validation.Api.Client.Services;
+using Moq;
 using Xunit.Abstractions;
 
 namespace MOI.Id.Validation.Api.Client.Tests;
@@ -9,7 +11,7 @@ public class JwtServiceTests : BaseServiceTests
 	private readonly IJwtService _jwtService;
 
 	public JwtServiceTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper) =>
-		_jwtService = new JwtService(JwtConfig, MOIIdValidationApiConfig);
+		_jwtService = new JwtService(Mock.Of<ILogger<JwtService>>(), JwtConfig, MOIIdValidationApiConfig);
 
 	[Fact]
 	public async Task BuildAsync_ShouldSucceed()
