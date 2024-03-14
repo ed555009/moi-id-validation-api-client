@@ -13,10 +13,10 @@ namespace MOI.Id.Validation.Api.Client.Services;
 public class JwtService : IJwtService
 {
 	private readonly ILogger<JwtService> _logger;
-	private readonly JwtConfig _jwtConfig;
+	private readonly IJwtConfig _jwtConfig;
 	private readonly MOIIdValidationApiConfig _mOIIdVerificationApiConfig;
 
-	public JwtService(ILogger<JwtService> logger, JwtConfig jwtConfig, MOIIdValidationApiConfig mOIIdValidationApiConfig)
+	public JwtService(ILogger<JwtService> logger, IJwtConfig jwtConfig, MOIIdValidationApiConfig mOIIdValidationApiConfig)
 	{
 		_logger = logger;
 		_jwtConfig = jwtConfig;
@@ -55,15 +55,15 @@ public class JwtService : IJwtService
 		{
 			new("orgId", _jwtConfig.OrganizationId),
 			new("apId", _jwtConfig.ApplicationId),
-			new("userId", JwtConfig.UserId),
-			new("jobId", JwtConfig.JobId),
-			new("opType", JwtConfig.OpType),
+			new("userId", _jwtConfig.UserId),
+			new("jobId", _jwtConfig.JobId),
+			new("opType", _jwtConfig.OpType),
 			new("conditionMap", JsonSerializer.Serialize(conditionMapModel)),
 			new(JwtRegisteredClaimNames.Iss, _jwtConfig.Issuer),
 			new(JwtRegisteredClaimNames.Aud, _jwtConfig.Audience),
 			new(JwtRegisteredClaimNames.Iat, _jwtConfig.IssuedAt.ToString(), ClaimValueTypes.Integer64),
 			new(JwtRegisteredClaimNames.Exp, _jwtConfig.ExpiredAt.ToString(), ClaimValueTypes.Integer64),
-			new(JwtRegisteredClaimNames.Sub, JwtConfig.Subject),
+			new(JwtRegisteredClaimNames.Sub, _jwtConfig.Subject),
 			new(JwtRegisteredClaimNames.Jti, await JwtConfig.JtiGenerator())
 		};
 }

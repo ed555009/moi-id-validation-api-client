@@ -21,7 +21,7 @@ public static class ServicesExtensions
 		var refitSettings = GetRefitSettings();
 
 		_ = services
-			.AddSingleton(jwtConfig)
+			.AddTransient<IJwtConfig>(_ => jwtConfig)
 			.AddSingleton(moiIdValidationApiConfig)
 			.AddRefitClient<IMOIIdValidationApi>(refitSettings)
 			.ConfigureHttpClient(c => c.BaseAddress = new Uri($"{moiIdValidationApiConfig.BaseUrl}/integration/rwv2c2"));
@@ -29,16 +29,19 @@ public static class ServicesExtensions
 		switch (serviceLifetime)
 		{
 			case ServiceLifetime.Scoped:
-				_ = services.AddScoped<IJwtService, JwtService>();
-				_ = services.AddScoped<IMOIIdValidationApiService, MOIIdValidationApiService>();
+				_ = services
+					.AddScoped<IJwtService, JwtService>()
+					.AddScoped<IMOIIdValidationApiService, MOIIdValidationApiService>();
 				break;
 			case ServiceLifetime.Transient:
-				_ = services.AddTransient<IJwtService, JwtService>();
-				_ = services.AddTransient<IMOIIdValidationApiService, MOIIdValidationApiService>();
+				_ = services
+					.AddTransient<IJwtService, JwtService>()
+					.AddTransient<IMOIIdValidationApiService, MOIIdValidationApiService>();
 				break;
 			default:
-				_ = services.AddSingleton<IJwtService, JwtService>();
-				_ = services.AddSingleton<IMOIIdValidationApiService, MOIIdValidationApiService>();
+				_ = services
+					.AddSingleton<IJwtService, JwtService>()
+					.AddSingleton<IMOIIdValidationApiService, MOIIdValidationApiService>();
 				break;
 		}
 
