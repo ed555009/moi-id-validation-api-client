@@ -1,4 +1,5 @@
 using System.Net;
+using Microsoft.Extensions.Logging;
 using MOI.Id.Validation.Api.Client.Interfaces;
 using MOI.Id.Validation.Api.Client.Models.Responses;
 using MOI.Id.Validation.Api.Client.Services;
@@ -15,9 +16,11 @@ public class MOIIdValidationApiServiceTests : BaseServiceTests
 
 	public MOIIdValidationApiServiceTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
 	{
-		_jwtService = new JwtService(JwtConfig, MOIIdValidationApiConfig);
+		_jwtService = new JwtService(Mock.Of<ILogger<JwtService>>(), JwtConfig, MOIIdValidationApiConfig);
 		_moiIdValidationApiMock = new Mock<IMOIIdValidationApi>();
-		_moiIdValidationApiService = new MOIIdValidationApiService(_moiIdValidationApiMock.Object, _jwtService);
+		_moiIdValidationApiService = new MOIIdValidationApiService(
+			Mock.Of<ILogger<MOIIdValidationApiService>>(),
+			_moiIdValidationApiMock.Object, _jwtService);
 	}
 
 	[Fact]
