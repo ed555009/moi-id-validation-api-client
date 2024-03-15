@@ -75,4 +75,10 @@ uwvm6I8s8TQzSwrK3ToKF7JcaIoLMhXhHLEdPl7xnNDnrjUdJVI=
 			new HttpResponseMessage(statusCode),
 			default,
 			new RefitSettings()));
+
+	protected static Task<ApiResponse<string>> CreateStringResponse(HttpStatusCode statusCode) =>
+		Task.FromResult(new ApiResponse<string>(
+			new HttpResponseMessage(statusCode),
+			default,
+			new RefitSettings()));
 }

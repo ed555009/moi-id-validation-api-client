@@ -22,7 +22,7 @@ public class MOIIdValidationApiService : IMOIIdValidationApiService
 		_jwtService = jwtService;
 	}
 
-	public async Task<ApiResponse<CheckIdCardModel>> ValidateAsync(
+	public async Task<ApiResponse<string>> ValidateAsync(
 		ConditionMapModel conditionMapModel,
 		CancellationToken cancellationToken = default)
 	{
@@ -32,7 +32,10 @@ public class MOIIdValidationApiService : IMOIIdValidationApiService
 			await _jwtService.BuildAsync(conditionMapModel),
 			cancellationToken);
 
-		_logger.LogDebug("ValidateAsync Result: {@Result}", result);
+		_logger.LogDebug("ValidateAsync StatusCode: {StatusCode}, IsSuccess: {IsSuccess}",
+			result.StatusCode,
+			result.IsSuccessStatusCode);
+		_logger.LogDebug("ValidateAsync Result content: {@ResultContent}", result.Content);
 
 		return result;
 	}
