@@ -12,7 +12,7 @@ public interface IMOIIdValidationApiService
 	/// <summary>
 	/// 驗證
 	/// </summary>
-	Task<ApiResponse<CheckIdCardModel>> ValidateAsync(
+	Task<ApiResponse<string>> ValidateAsync(
 		ConditionMapModel conditionMapModel,
 		CancellationToken cancellationToken = default);
 }
