@@ -22,7 +22,7 @@ public class MOIIdValidationApiService : IMOIIdValidationApiService
 		_jwtService = jwtService;
 	}
 
-	public async Task<ApiResponse<string>> ValidateAsync(
+	public async Task<ApiResponse<CheckIdCardModel>> ValidateAsync(
 		ConditionMapModel conditionMapModel,
 		CancellationToken cancellationToken = default)
 	{

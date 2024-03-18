@@ -1,6 +1,6 @@
 namespace MOI.Id.Validation.Api.Client.Models.Responses;
 
-public abstract class CheckIdCardApplyModel
+public class CheckIdCardApplyModel
 {
 	/// <summary>
 	/// 查驗總結果

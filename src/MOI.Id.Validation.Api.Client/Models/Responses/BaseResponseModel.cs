@@ -3,7 +3,7 @@ using MOI.Id.Validation.Api.Client.Interfaces;
 
 namespace MOI.Id.Validation.Api.Client.Models.Responses;
 
-public abstract class BaseResponseModel<T> : IBaseResponseModel
+public class BaseResponseModel<T> : IBaseResponseModel
 {
 	/// <summary>
 	/// Http狀態碼

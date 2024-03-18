@@ -29,7 +29,7 @@ public class MOIIdValidationApiServiceTests : BaseServiceTests
 		// Given
 		_ = _moiIdValidationApiMock
 			.Setup(x => x.GetAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
-			.Returns(CreateStringResponse(HttpStatusCode.OK));
+			.Returns(CreateResponse<CheckIdCardModel>(HttpStatusCode.OK));
 
 		// When
 		var result = await _moiIdValidationApiService.ValidateAsync(ConditionMapModel, CancellationToken.None);
