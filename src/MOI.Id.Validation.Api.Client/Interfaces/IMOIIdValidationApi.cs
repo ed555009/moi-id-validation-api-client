@@ -7,7 +7,7 @@ namespace MOI.Id.Validation.Api.Client.Interfaces;
 public interface IMOIIdValidationApi
 {
 	[Get("/")]
-	Task<ApiResponse<string>> GetAsync(
+	Task<ApiResponse<CheckIdCardModel>> GetAsync(
 		[Authorize("Bearer")] string token,
 		CancellationToken cancellationToken = default);
 }
